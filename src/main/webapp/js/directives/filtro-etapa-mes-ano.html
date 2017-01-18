@@ -1,0 +1,32 @@
+<form novalidate name="formulario">
+	<div class="form-group row">
+   		<label for="selectEtapa">Etapa</label>
+   		<select class="form-control" id="selectEtapa" placeholder="Selecione a etapa" 
+   		        ng-model="etapaSelecionada"
+   		        ng-options="etapa.etapa.nomeEtapa for etapa in etapas | orderBy:['+sequencia']"
+   		        required>
+   		</select>
+  	</div>
+  	<div class="form-group row">
+	   	<label for="selectRegiao">M&ecirc;s e ano</label>
+   		<select class="form-control" id="selectFiltro" placeholder="Selecione o filtro de mês e ano" 
+   		        ng-model="filtroSelecionado"
+   		        ng-options="filtro.nomeMes | lowercase for filtro in filtros | orderBy:['-ano','-mes'] | limitTo:24"
+   		        required>
+   		</select>
+  	</div>
+  	<div class="form-group row">
+		<a 
+			href="{{urlLink}}?etapa={{etapaSelecionada.etapa.id}}&sequencia={{etapaSelecionada.sequencia}}&ano={{filtroSelecionado.ano}}&mes={{filtroSelecionado.mes}}" 
+			class="btn btn-primary btn-block" 
+			ng-show="{{mostrarLink}}"
+			ng-disabled="formulario.$invalid">{{titulo}}  				
+		</a>
+		<button 
+			ng-click="onClick(paramEtapa, paramSequencia, paramMes, paramAno)" 
+			class="btn btn-primary btn-block" 
+			ng-show="{{mostrarBotao}}"
+			ng-disabled="formulario.$invalid">{{titulo}}
+		</button>
+  	</div>
+</form>

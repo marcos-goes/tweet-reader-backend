@@ -1,0 +1,18 @@
+<div class="row" ng-repeat="usuario in ctrl.usuarios">
+	<div class="col-sm-12">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="media-left">
+					<a href="{{usuario.url}}" target="_blank">
+						<img class="media-object" src="{{usuario.profileImageURL}}" alt="link">
+					</a>
+  				</div>
+  				<div class="media-body">
+	    			<h3>{{usuario.name}} <small><span class="badge">{{usuario.followersCount}}</span></small></h3>
+					<h4>@{{usuario.screenName}}</h4>
+					<h4><small>{{usuario.description}}</small></h4>
+				</div>
+  			</div>
+  		</div>
+	</div>
+</div>

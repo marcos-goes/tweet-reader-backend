@@ -3,6 +3,6 @@
    "-//JBoss//DTD Web Application 5.0//EN"
    "http://www.jboss.org/j2ee/dtd/jboss-web_5_0.dtd">
 <jboss-web>
-    <context-root>tweet-reader-backend</context-root>
+    <context-root>tweet-reader</context-root>
 </jboss-web>
 

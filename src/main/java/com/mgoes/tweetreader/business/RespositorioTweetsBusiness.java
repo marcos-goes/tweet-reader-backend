@@ -19,6 +19,8 @@ public class RespositorioTweetsBusiness {
 	private User[] topFiveSeguidores = new User[5];
 	
 	private Map<String, Integer> mapLangPtPorHashtag = new HashMap<String, Integer>();
+	
+	private Map<Integer, Integer> mapTweetsPorHora = new HashMap<Integer, Integer>();
 
 	public List<Tweet> getTweets() {
 		return tweets;
@@ -35,7 +37,9 @@ public class RespositorioTweetsBusiness {
 	public Map<String, Integer> getMapLangPtPorHashtag() {
 		return mapLangPtPorHashtag;
 	}
-	
-	
+
+	public Map<Integer, Integer> getMapTweetsPorHora() {
+		return mapTweetsPorHora;
+	}		
 
 }

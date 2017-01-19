@@ -1,4 +1,4 @@
-angular.module('estatApp',['ngAnimate', 'ngRoute', 'estatServices'])
+angular.module('tweetReaderApp',['ngAnimate', 'ngRoute', 'tweetReaderServices'])
 	.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
 
 		//$locationProvider.html5Mode(true);
@@ -6,21 +6,21 @@ angular.module('estatApp',['ngAnimate', 'ngRoute', 'estatServices'])
 
 		$routeProvider
 		.when('/', {
-			template: '<h3>Selecione entre as opções acima.</h3>'
+			template: '<h5>Selecione entre as opções acima.</h5>'
 		})
-		.when('/grafico-praca-mes', {
-			templateUrl: './partials/grafico-praca-mes.html',
-			controller: 'GraficoPracaMesController',
+		.when('/top-five', {
+			templateUrl: './partials/top-five.html',
+			controller: 'TopFiveController',
 			controllerAs: 'ctrl'
 		})
-		.when('/grafico-etapa-mes', {
-			templateUrl: './partials/grafico-etapa-mes.html',
-			controller: 'GraficoEtapaMesController',
+		.when('/tweets-lang-pt', {
+			templateUrl: './partials/tweets-lang-pt.html',
+			controller: 'TweetsLangPtController',
 			controllerAs: 'ctrl'
 		})
-		.when('/grafico-praca-ano', {
-			templateUrl: './partials/grafico-praca-ano.html',
-			controller: 'GraficoPracaAnoController',
+		.when('/tweets-hora', {
+			templateUrl: './partials/tweets-hora.html',
+			controller: 'TweetsHoraController',
 			controllerAs: 'ctrl'
 		})
 		.otherwise({

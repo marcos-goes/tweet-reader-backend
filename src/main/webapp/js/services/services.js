@@ -1,4 +1,4 @@
-angular.module('infoServices', ['ngResource'])
+angular.module('tweetReaderServices', ['ngResource'])
 
 	.factory('recursoTopFive', function($resource){
 		return $resource('./rest/info/users-top-five',null, {

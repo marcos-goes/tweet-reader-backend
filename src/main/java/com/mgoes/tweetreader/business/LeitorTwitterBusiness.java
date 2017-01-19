@@ -1,6 +1,10 @@
 package com.mgoes.tweetreader.business;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map.Entry;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
@@ -8,6 +12,7 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 
+import com.mgoes.tweetreader.domain.DescricaoQtdeVO;
 import com.mgoes.tweetreader.domain.Tweet;
 import com.mgoes.tweetreader.util.ConstantesConfig;
 
@@ -135,7 +140,7 @@ public class LeitorTwitterBusiness {
 		log.info(".:: Lang=pt por Hashtag ::.");
 		
 		for(Entry<String, Integer> entry : repositorio.getMapLangPtPorHashtag().entrySet()){
-			log.info("#" + entry.getKey() + ": " + entry.getValue());
+			log.info("   #" + entry.getKey() + ": " + entry.getValue());
 		}
 		
 		log.info("Finalizado consultaLangPtPorHashtag.");
@@ -146,25 +151,58 @@ public class LeitorTwitterBusiness {
 		
 		for(Tweet tweet : repositorio.getTweets()){
 			
-			if(tweet.getStatus().getLang().toLowerCase().equals("pt")){
-				Integer contador = repositorio.getMapLangPtPorHashtag().get(tweet.getHashtag());
-				
-				if(contador==null){
-					repositorio.getMapLangPtPorHashtag().put(tweet.getHashtag(), 1);
-				} else {
-					contador++;
-					repositorio.getMapLangPtPorHashtag().replace(tweet.getHashtag(), contador);
-				}				
-			}
+			Integer hora = tweet.getStatus().getCreatedAt().getHours();
+			
+			Integer contador = repositorio.getMapTweetsPorHora().get(hora);
+			
+		
+			if(contador==null){
+				repositorio.getMapTweetsPorHora().put(hora, 1);
+			} else {
+				contador++;
+				repositorio.getMapTweetsPorHora().replace(hora, contador);
+			}				
+
 			
 		}
 		
 		log.info(".:: Tweets por hora ::.");
 		
-		for(Entry<String, Integer> entry : repositorio.getMapLangPtPorHashtag().entrySet()){
-			log.info("#" + entry.getKey() + ": " + entry.getValue());
-		}
+		SortedSet<Integer> keys = new TreeSet<Integer>(repositorio.getMapTweetsPorHora().keySet());
+		for(Integer key : keys)
+			log.info("   Hora " + key + ": " + repositorio.getMapTweetsPorHora().get(key));
 		
 		log.info("Finalizado consultaTotalTweetsPorHora.");
-	}	
+	}
+	
+	
+	public List<User> buscaTopFiveUsuariosSeguidores(){
+		List<User> usuariosTopFive = new ArrayList<User>();
+		
+		for(User usuario : repositorio.getTopFiveSeguidores())
+			usuariosTopFive.add(usuario);
+		
+		return usuariosTopFive;
+	}
+	
+	public List<DescricaoQtdeVO> buscaTotalTweetsPorLangPt(){
+		List<DescricaoQtdeVO> lista = new ArrayList<DescricaoQtdeVO>();
+		
+		for(Entry<String, Integer> entry : repositorio.getMapLangPtPorHashtag().entrySet()){
+			lista.add(new DescricaoQtdeVO("#" + entry.getKey(), entry.getValue()));
+		}
+				
+		return lista;
+	}
+	
+	public List<DescricaoQtdeVO> buscaTotalTweetsPorHora(){
+		List<DescricaoQtdeVO> lista = new ArrayList<DescricaoQtdeVO>();
+		
+		SortedSet<Integer> keys = new TreeSet<Integer>(repositorio.getMapTweetsPorHora().keySet());
+		for(Integer key : keys)
+			lista.add(new DescricaoQtdeVO(key.toString(), repositorio.getMapTweetsPorHora().get(key)));
+
+		return lista;
+	}
+	
 }

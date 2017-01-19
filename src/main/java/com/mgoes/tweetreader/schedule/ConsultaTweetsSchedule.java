@@ -1,7 +1,6 @@
 package com.mgoes.tweetreader.schedule;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.Schedule;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
@@ -22,6 +21,7 @@ public class ConsultaTweetsSchedule {
 			business.consultaTweets();
 			business.consultaTopFiveSeguidores();
 			business.consultaLangPtPorHashtag();
+			business.consultaTotalTweetsPorHora();
 		} catch (Exception e) {
 			e.printStackTrace();
 			// Não faz nada para não derrubar a aplicação.

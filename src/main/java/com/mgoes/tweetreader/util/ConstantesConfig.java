@@ -9,7 +9,7 @@ public final class ConstantesConfig {
 	
 	public static final String TWEET_QUERY_ENCODED = "%23";
 	public static final String[] TWEETS_HASHTAGS = {"brasil", "brazil", "brasil2016", "brazil2016", "jogosolimpicos", "olimpiadas", "olimpiadas2016", "olympics", "rio2016", "riodejaneiro"};
-	public static final int TWEETS_COUNT = 20;
+	public static final int TWEETS_COUNT = 100;
 		
 	
 }
